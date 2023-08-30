@@ -1,0 +1,76 @@
+version: "3"
+services:
+
+  # debian with C development environment and tools
+  debian-cdev:
+    image: debian-cdev:latest
+    container_name: debian-cdev
+    build:
+      dockerfile: ./debian-cdev/dockerfile
+      context: ./
+      network: host
+    stdin_open: true
+    tty: true
+    command: ["bash"]
+    volumes:
+      - ./:/app
+
+  # debian-cdev with opencv library
+  opencv-cdev:
+    image: opencv-cdev:latest
+    container_name: opencv-cdev
+    build:
+      dockerfile: ./opencv-cdev/dockerfile
+      context: ./
+      network: host
+    stdin_open: true
+    tty: true
+    command: ["bash"]
+    volumes:
+      - .:/app
+
+  # test opencv-cdev
+  opencv-cdev-test:
+    image: opencv-cdev:latest
+    container_name: opencv-cdev-test
+    command: bash -c "cd /examples/opencv-app && ./make_n_run.sh" 
+
+  # debian-cdev with libtorch library
+  libtorch-cdev:
+    image: libtorch-cdev:latest
+    container_name: libtorch-cdev
+    build:
+      dockerfile: ./libtorch-cdev/dockerfile
+      context: ./
+      network: host
+    stdin_open: true
+    tty: true
+    command: ["bash"]
+    volumes:
+      - .:/app
+
+  # test libtorch-cdev
+  libtorch-cdev-test:
+    image: libtorch-cdev:latest
+    container_name: libtorch-cdev-test
+    command: bash -c "cd /examples/libtorch-app && ./make_n_run.sh" 
+      
+  # combine opencv-cdev and libtorch-cdev
+  cv-cdev:
+    image: cv-cdev:latest
+    container_name: cv-cdev
+    build:
+      dockerfile: ./cv-cdev/dockerfile
+      context: ./
+      network: host
+    stdin_open: true
+    tty: true
+    command: ["bash"]
+    volumes:
+      - .:/app
+
+  # test cv-cdev
+  cv-cdev-test:
+    image: cv-cdev:latest
+    container_name: cv-cdev-test
+    command: bash -c "cd /examples/opencv-app && ./make_n_run.sh && cd /examples/libtorch-app && ./make_n_run.sh" 

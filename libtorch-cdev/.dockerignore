@@ -1,0 +1,4 @@
+dockerfile
+**/*.zip
+**/libtorch*
+

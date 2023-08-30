@@ -1,0 +1,12 @@
+FROM libtorch-cdev AS libtorch-stage
+
+FROM opencv-cdev
+
+COPY --from=libtorch-stage /opt /opt
+COPY --from=libtorch-stage /examples /examples
+
+ENV TORCH_DIR=/opt/libtorch/share/cmake
+
+WORKDIR /app
+
+CMD ["bash"]
