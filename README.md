@@ -29,6 +29,6 @@ See example app at `/examples/libtorch-cdev/make_n_run.sh`
 ### cv-cdev
 Build based on opencv-cdev and libtorch-cdev. Designed to be a development container providing opencv and libtorch on top of debian-cdev.
 
-Test image by docker`-compose up cv-cdev-test`
+Test image by `docker-compose up cv-cdev-test`
 
 See example app at the same locations as example apps in opencv-cdev and libtorch-cdev
