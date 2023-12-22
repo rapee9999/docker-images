@@ -51,11 +51,31 @@ services:
 
   # test libtorch-cdev
   libtorch-cdev-test:
-    image: libtorch-cdev:latest
+    image: rapee9999/libtorch-cdev:latest
     container_name: libtorch-cdev-test
     command: bash -c "cd /examples/libtorch-app && ./make_n_run.sh" 
+
+  # opencv-cdev with tesseract library
+  tesseract-cdev:
+    image: rapee9999/tesseract-cdev:latest
+    container_name: tesseract-cdev
+    build:
+      dockerfile: ./tesseract-cdev/dockerfile
+      context: ./
+      network: host
+    stdin_open: true
+    tty: true
+    command: ["bash"]
+    volumes:
+      - .:/app
+
+  # test tesseract-cdev
+  tesseract-cdev-test:
+    image: rapee9999/tesseract-cdev:latest
+    container_name: tesseract-cdev-test
+    command: bash -c "cd /examples/tesseract-app && ./make_n_run.sh" 
       
-  # combine opencv-cdev and libtorch-cdev
+  # combine tesseract-cdev and libtorch-cdev
   cv-cdev:
     image: rapee9999/cv-cdev:latest
     container_name: cv-cdev
@@ -73,4 +93,4 @@ services:
   cv-cdev-test:
     image: rapee9999/cv-cdev:latest
     container_name: cv-cdev-test
-    command: bash -c "cd /examples/opencv-app && ./make_n_run.sh && cd /examples/libtorch-app && ./make_n_run.sh" 
+    command: bash -c "cd /examples/opencv-app && ./make_n_run.sh && cd /examples/tesseract-app && ./make_n_run.sh && cd /examples/libtorch-app && ./make_n_run.sh" 

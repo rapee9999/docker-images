@@ -23,6 +23,15 @@ See example app at `/examples/opencv-cdev/make_n_run.sh`
 
 [To dockerfile](opencv-cdev/dockerfile)
 
+### tesseract-cdev
+Build based on opencv-cdev image and install libtesseract-dev via apt together with english dataset. Designed to be a development container providing tesseract library on top of opencv-cdev.
+
+Test image by `docker-compose up tesseract-cdev-test`
+
+See example app at `/examples/tesseract-cdev/make_n_run.sh`
+
+[To dockerfile](tesseract-cdev/dockerfile)
+
 ### libtorch-cdev
 Build based on debian-cdev image and download libtorch in `/opt`. Designed to be a development container providing libtorch library on top of debian-cdev.
 
@@ -33,7 +42,7 @@ See example app at `/examples/libtorch-cdev/make_n_run.sh`
 [To dockerfile](libtorch-cdev/dockerfile)
 
 ### cv-cdev
-Build based on opencv-cdev and libtorch-cdev. Designed to be a development container providing opencv and libtorch on top of debian-cdev.
+Build based on tesseract-cdev and libtorch-cdev. Designed to be a development container providing opencv, libtesseract and libtorch on top of debian-cdev.
 
 Test image by `docker-compose up cv-cdev-test`
 
