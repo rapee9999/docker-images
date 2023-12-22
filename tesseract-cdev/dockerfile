@@ -1,0 +1,23 @@
+FROM rapee9999/debian-cdev:latest AS build-tess-stage
+
+RUN apt-get update -y && \
+    apt-get install -y apt-transport-https gnupg gnupg1 gnupg2 && \
+    echo "deb https://notesalexp.org/tesseract-ocr/bullseye/ bullseye main" >> /etc/apt/sources.list && \
+    wget -O /etc/apt/trusted.gpg.d/alexp_key.asc https://notesalexp.org/debian/alexp_key.asc && \
+    apt-key add /etc/apt/trusted.gpg.d/alexp_key.asc && \
+    apt-get update -y && \
+    apt-get install -y libtesseract-dev tesseract-ocr-eng && \
+    apt-get clean -y
+
+
+FROM rapee9999/opencv-cdev:latest
+
+COPY --from=build-tess-stage /usr/include/tesseract /usr/include/tesseract
+COPY --from=build-tess-stage /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu
+COPY --from=build-tess-stage /usr/share/doc /usr/share/doc
+COPY --from=build-tess-stage /usr/share/tesseract-ocr /usr/share/tesseract-ocr
+COPY ./tesseract-cdev/example /examples/tesseract-app
+
+WORKDIR /app
+
+CMD ["bash"]
