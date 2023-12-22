@@ -3,7 +3,7 @@ services:
 
   # debian with C development environment and tools
   debian-cdev:
-    image: debian-cdev:latest
+    image: rapee9999/debian-cdev:latest
     container_name: debian-cdev
     build:
       dockerfile: ./debian-cdev/dockerfile
@@ -17,7 +17,7 @@ services:
 
   # debian-cdev with opencv library
   opencv-cdev:
-    image: opencv-cdev:latest
+    image: rapee9999/opencv-cdev:latest
     container_name: opencv-cdev
     build:
       dockerfile: ./opencv-cdev/dockerfile
@@ -31,13 +31,13 @@ services:
 
   # test opencv-cdev
   opencv-cdev-test:
-    image: opencv-cdev:latest
+    image: rapee9999/opencv-cdev:latest
     container_name: opencv-cdev-test
     command: bash -c "cd /examples/opencv-app && ./make_n_run.sh" 
 
   # debian-cdev with libtorch library
   libtorch-cdev:
-    image: libtorch-cdev:latest
+    image: rapee9999/libtorch-cdev:latest
     container_name: libtorch-cdev
     build:
       dockerfile: ./libtorch-cdev/dockerfile
@@ -57,7 +57,7 @@ services:
       
   # combine opencv-cdev and libtorch-cdev
   cv-cdev:
-    image: cv-cdev:latest
+    image: rapee9999/cv-cdev:latest
     container_name: cv-cdev
     build:
       dockerfile: ./cv-cdev/dockerfile
@@ -71,6 +71,6 @@ services:
 
   # test cv-cdev
   cv-cdev-test:
-    image: cv-cdev:latest
+    image: rapee9999/cv-cdev:latest
     container_name: cv-cdev-test
     command: bash -c "cd /examples/opencv-app && ./make_n_run.sh && cd /examples/libtorch-app && ./make_n_run.sh" 
