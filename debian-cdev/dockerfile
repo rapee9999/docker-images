@@ -1,5 +1,5 @@
 # bullseye
-FROM debian:11.7
+FROM rapee9999/debian:11.7
 
 RUN apt-get update -qy && \
     apt-get install -qy \

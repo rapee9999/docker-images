@@ -1,4 +1,4 @@
-FROM debian-cdev AS download-stage
+FROM rapee9999/debian-cdev:latest AS download-stage
 
 WORKDIR /opt
 
@@ -6,7 +6,7 @@ RUN wget https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-wit
     unzip "libtorch-cxx11-abi-shared-with-deps-2.0.1+cpu.zip"
 
 
-FROM debian-cdev
+FROM rapee9999/debian-cdev:latest
 
 COPY --from=download-stage /opt/libtorch /opt/libtorch
 COPY ./libtorch-cdev/example /examples/libtorch-app

@@ -1,4 +1,4 @@
-FROM debian-cdev
+FROM rapee9999/debian-cdev:latest
 
 RUN apt-get update -qy && \
     apt-get install -qy libopencv-dev=4.5.1+dfsg-5 && \

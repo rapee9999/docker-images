@@ -1,6 +1,6 @@
-FROM libtorch-cdev AS libtorch-stage
+FROM rapee9999/libtorch-cdev:latest AS libtorch-stage
 
-FROM opencv-cdev
+FROM rapee9999/opencv-cdev:latest
 
 COPY --from=libtorch-stage /opt /opt
 COPY --from=libtorch-stage /examples /examples
