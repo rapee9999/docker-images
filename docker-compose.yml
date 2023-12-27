@@ -94,3 +94,17 @@ services:
     image: rapee9999/cv-cdev:latest
     container_name: cv-cdev-test
     command: bash -c "cd /examples/opencv-app && ./make_n_run.sh && cd /examples/tesseract-app && ./make_n_run.sh && cd /examples/libtorch-app && ./make_n_run.sh" 
+      
+  # python dev dependencies together with cv environment.
+  cv-pyc-dev:
+    image: rapee9999/cv-pyc-dev:latest
+    container_name: cv-pyc-dev
+    build:
+      dockerfile: dockerfile
+      context: ./
+      network: host
+    stdin_open: true
+    tty: true
+    command: ["bash"]
+    volumes:
+      - .:/app
